@@ -1,17 +1,19 @@
 FROM node:22-bookworm-slim AS deps
 
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
+RUN corepack enable && corepack prepare yarn@1.22.22 --activate
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
 FROM node:22-bookworm-slim AS builder
 
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
+RUN corepack enable && corepack prepare yarn@1.22.22 --activate
 COPY --from=deps /app/node_modules ./node_modules
-COPY package.json package-lock.json ./
+COPY package.json yarn.lock ./
 COPY . .
-RUN mkdir -p public && npm run build
+RUN mkdir -p public && yarn build
 
 FROM node:22-bookworm-slim AS runner
 
