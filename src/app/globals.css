@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/* Tailwind v4 dark utilities use the same persisted `.dark` root class as the
+   ArcLocal component theme. This keeps future `dark:` utilities predictable. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --arc-navy-950: #062f66;
+  --arc-navy-800: #12396a;
+  --arc-navy-700: #0d4a8a;
+  --arc-green-600: #54a832;
+  --arc-green-700: #448e29;
+  --arc-green-100: #eff8e9;
+  --arc-blue-050: #f5f8fc;
+  --arc-blue-100: #edf4fc;
+  --arc-ink: #102b54;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--arc-ink);
+  background: #ffffff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: var(--arc-blue-050); }
+html.dark body { background:#07182f; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--arc-green-600) 35%, transparent);
+  outline-offset: 2px;
+}
+::selection { background: var(--arc-green-600); color: #ffffff; }
+
+/* Make every interactive control visibly actionable. Native text inputs
+   deliberately keep the text cursor. */
+button:not(:disabled),a[href],[role="button"] { cursor:pointer; }
+button:disabled,[aria-disabled="true"] { cursor:not-allowed; }
+.public-back-to-top { position:fixed; right:20px; bottom:20px; z-index:45; display:flex; align-items:center; gap:8px; padding:11px 14px; border:1px solid rgba(255,255,255,.48); border-radius:999px; color:#fff; background:linear-gradient(135deg,#12396a,#54a832); box-shadow:0 16px 34px rgba(6,47,102,.28); font:inherit; font-size:12px; font-weight:800; cursor:pointer; opacity:0; pointer-events:none; transform:translateY(12px); transition:opacity .22s ease,transform .22s ease; }.public-back-to-top.visible { opacity:1; pointer-events:auto; transform:translateY(0); }.public-back-to-top:hover { transform:translateY(-2px); }
+
+.site-theme-toggle { display:inline-flex; align-items:center; gap:6px; padding:6px 9px; border:1px solid rgba(174,201,233,.32); border-radius:9px; color:#dceaff; background:rgba(255,255,255,.09); font:inherit; font-size:10px; font-weight:800; cursor:pointer; transition:transform .18s ease,background .18s ease; }.site-theme-toggle:hover { background:rgba(255,255,255,.18); transform:translateY(-1px); }
+.public-shell.theme-dark { color:#d9e6f5; background:radial-gradient(circle at 8% 8%,rgba(84,168,50,.14),transparent 25%),#081727; }.public-shell.theme-dark header { border-color:rgba(174,201,233,.12)!important; background:rgba(10,24,42,.9)!important; }.public-shell.theme-dark main > section:not(#why-arclocal) { background-color:transparent; }.public-shell.theme-dark footer { border-color:rgba(174,201,233,.12)!important; color:#aebfd4!important; background:#0a1b2e!important; }.public-shell.theme-dark .bg-white,.public-shell.theme-dark .bg-\[\#f8fbfd\],.public-shell.theme-dark .bg-\[\#f5f9fe\] { background-color:#102239!important; }.public-shell.theme-dark .border-slate-100,.public-shell.theme-dark .border-slate-200 { border-color:rgba(174,201,233,.14)!important; }.public-shell.theme-dark .text-\[\#12396a\],.public-shell.theme-dark h1,.public-shell.theme-dark h2,.public-shell.theme-dark h3 { color:#edf5ff!important; }.public-shell.theme-dark .text-slate-500,.public-shell.theme-dark .text-slate-600 { color:#adc0d7!important; }.public-shell.theme-dark .bg-\[radial-gradient\(circle_at_14\%_22\%\,\#ecf8e8_0\,transparent_28\%\)\,linear-gradient\(180deg\,\#ffffff_0\%\,\#f7fbf6_100\%\)\] { background:radial-gradient(circle at 14% 22%,rgba(84,168,50,.15),transparent 28%),linear-gradient(180deg,#0b1d31 0%,#0c1e32 100%)!important; }
+
+@media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.001ms !important; scroll-behavior:auto !important; transition-duration:.001ms !important; } }
+
+@media (max-width:780px) { .public-back-to-top span { display:none; }.public-back-to-top { right:14px; bottom:14px; width:46px; height:46px; justify-content:center; padding:0; } }
+@media (max-width:640px) { .site-theme-toggle span { display:none; }.site-theme-toggle { width:32px; height:32px; justify-content:center; padding:0; } }
